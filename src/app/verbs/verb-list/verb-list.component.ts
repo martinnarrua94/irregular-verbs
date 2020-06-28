@@ -2,7 +2,6 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { IVerb } from '../verb';
 import { VerbService } from '../verb.service';
 import { MatTableDataSource } from '@angular/material/table';
-import { MatPaginator } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-verb-list',
@@ -16,16 +15,13 @@ export class VerbListComponent implements OnInit {
   displayedColumns: string[] = ['base', 'pastSimple', 'pastParticiple'];
   
   dataSource = new MatTableDataSource<IVerb>();
-  @ViewChild(MatPaginator, { static: true })
-  paginator!: MatPaginator;
   
   constructor(private verbService: VerbService) { }
 
   ngOnInit(): void {
      this.verbService.getVerbs().subscribe({
        next: verbs => {
-         this.dataSource = new MatTableDataSource<IVerb>(verbs);
-         this.dataSource.paginator = this.paginator;       
+         this.dataSource = new MatTableDataSource<IVerb>(verbs);      
        }
      });
   }
