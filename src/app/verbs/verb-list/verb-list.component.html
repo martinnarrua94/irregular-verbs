@@ -1,5 +1,9 @@
-<div>
-    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+<mat-form-field>
+  <mat-label>Filter</mat-label>
+  <input matInput (keyup)="applyFilter($event)" placeholder="Ex. have" #input>
+</mat-form-field>
+<div class="mat-elevation-z8">    
+    <table mat-table [dataSource]="dataSource">
   
         <!-- Infinitive Column -->
         <ng-container matColumnDef="base">
