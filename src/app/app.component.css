@@ -1,0 +1,22 @@
+.app-content{
+    margin-top: -12px;
+}
+
+.spacer {
+    flex: 1 1 auto;
+  }
+
+.app-cover{
+    padding: 100px;
+    background-image: url(src/assets/hanged-flags-beside-building-2773597.jpg);
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-color: #464646;
+    margin-bottom: 10px;
+}
+
+.app-subtitle{
+    color: white;
+    text-shadow: 1px 1px;
+}
