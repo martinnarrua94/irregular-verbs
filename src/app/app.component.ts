@@ -14,5 +14,5 @@ export class AppComponent {
     this.trigger.openMenu();
   }
 
-  title = 'irregular-verbs';
+  title = 'Irregular Verbs';
 }
