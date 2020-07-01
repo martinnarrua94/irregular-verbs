@@ -19,3 +19,7 @@ table {
     text-overflow: ellipsis;
     white-space: nowrap;
   }
+
+  body{
+    padding: 0px 10px; 
+  }
