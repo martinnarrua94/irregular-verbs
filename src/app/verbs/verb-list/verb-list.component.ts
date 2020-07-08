@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { IVerb } from '../verb';
+import { IVerbTenses } from '../../models/verbTenses';
 import { VerbService } from '../verb.service';
 import { MatTableDataSource } from '@angular/material/table';
 
@@ -11,19 +11,19 @@ import { MatTableDataSource } from '@angular/material/table';
 
 export class VerbListComponent implements OnInit {
 
-  verbs: IVerb[] = [];
+  verbs: IVerbTenses[] = [];
   displayedColumns: string[] = ['base', 'pastSimple', 'pastParticiple'];
   letters: string[] = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z','ALL' ]
   
-  dataSource = new MatTableDataSource<IVerb>();
-  originalDataSource = new MatTableDataSource<IVerb>();
+  dataSource = new MatTableDataSource<IVerbTenses>();
+  originalDataSource = new MatTableDataSource<IVerbTenses>();
   
   constructor(private verbService: VerbService) { }
 
   ngOnInit(): void {
      this.verbService.getVerbs().subscribe({
        next: verbs => {
-         this.originalDataSource = new MatTableDataSource<IVerb>(verbs);
+         this.originalDataSource = new MatTableDataSource<IVerbTenses>(verbs);
          this.dataSource = this.originalDataSource;
        }
      });
@@ -46,7 +46,7 @@ export class VerbListComponent implements OnInit {
         break;
 
       default:
-        this.dataSource = new MatTableDataSource<IVerb>();
+        this.dataSource = new MatTableDataSource<IVerbTenses>();
         this.originalDataSource.data.forEach(verb => {
         if (verb.base.indexOf(filterValue.toLowerCase()) === 0) {
           this.dataSource.data.push(verb);
