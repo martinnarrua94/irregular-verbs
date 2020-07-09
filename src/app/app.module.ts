@@ -8,12 +8,14 @@ import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material/material.module';
+import { FooterComponent } from './shared/footer/footer.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    VerbListComponent
+    VerbListComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
