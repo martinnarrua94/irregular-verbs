@@ -1,19 +1,21 @@
 <p>
-    <mat-toolbar color="primary">
-      <span>{{title}}</span>
-      <span class="spacer"></span>
-      <button mat-icon-button>
-        <mat-icon>favorite</mat-icon>
-      </button>
-      <button mat-icon-button>
-        <mat-icon>share</mat-icon>
-      </button>
-    </mat-toolbar>
-  </p>
-  <div class="app-content">
-      <div class="app-cover">
-        <div class="mat-display-3" style="padding-top: 20px;">Welcome to <b>Irregular Verbs App</b></div>
-        <div class="mat-headline app-subtitle">Here you can find all irregular verb forms!</div>
-      </div>    
-    <router-outlet></router-outlet>
-  </div>
+  <mat-toolbar color="primary">
+    <span>{{title}}</span>
+    <span class="spacer"></span>
+    <button mat-icon-button>
+      <mat-icon>favorite</mat-icon>
+    </button>
+    <button mat-icon-button>
+      <mat-icon>share</mat-icon>
+    </button>
+  </mat-toolbar>
+</p>
+<div class="app-content">
+    <div class="app-cover">
+      <div class="mat-display-3" style="padding-top: 20px;">Welcome to <b>Irregular Verbs App</b></div>
+      <div class="mat-headline app-subtitle">Here you can find all irregular verb forms!</div>
+    </div>    
+  <router-outlet></router-outlet>
+  <div style="padding-top: 10px;"></div>
+  <app-footer></app-footer>
+</div>
