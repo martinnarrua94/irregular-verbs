@@ -1,0 +1,18 @@
+.app-footer{
+    height: 50px;
+}
+
+.app-footer-icons-container{
+    position: absolute;
+    right: 3px;
+    padding-top: 7px;
+}
+
+.app-footer-icon{
+    padding-right: 10px;
+    color: white
+}
+
+.app-footer-icon:hover{
+    opacity: 0.7;
+}
