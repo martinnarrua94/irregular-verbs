@@ -16,7 +16,7 @@
     <mat-icon aria-hidden="false" aria-label="Info icon">info</mat-icon>
     Sorry, we couldn't find any results matching your filter criteria.</div>
   <div class="container mat-elevation-z8" *ngIf="dataSource.data.length != 0">    
-      <table mat-table [dataSource]="dataSource">
+      <table mat-table [dataSource]="dataSource" multiTemplateDataRows>
           
           <!-- Infinitive Column -->
           <ng-container matColumnDef="base">
@@ -35,9 +35,37 @@
             <th mat-header-cell *matHeaderCellDef> Past Participle </th>
             <td mat-cell *matCellDef="let verb"> {{verb.pastParticiple}} </td>
           </ng-container>
-      
+
+          <!-- Expanded Content Column -->
+          <ng-container matColumnDef="verbDefinition">
+            <td mat-cell *matCellDef="let verb" [attr.colspan]="displayedColumns.length">
+              <div class="app-element-detail"
+                    [@detailExpand]="verb == expandedElement ? 'expanded' : 'collapsed'">
+                    <mat-spinner *ngIf="!verbDefinition && errorMessage == ''"></mat-spinner>
+                    
+                    <div *ngIf="errorMessage != ''" class="mat-subheading-2">
+                      <mat-icon aria-hidden="false" aria-label="Info icon">info</mat-icon>
+                      Sorry, we couldn't find any definitions for this verb.</div>
+
+                    <ul>
+                      <li *ngFor="let item of verbDefinition">
+                        <span class="mat-body-2">
+                          {{item.definition}}
+                        </span>
+                        - 
+                        <span class="mat-body-1">
+                        <i>"{{item.example}}"</i>
+                        </span>
+                      </li>                                                       
+                    </ul>                      
+              </div>
+            </td>
+          </ng-container>
+        
           <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky:true"></tr>
-          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          <tr mat-row *matRowDef="let verb; columns: displayedColumns;"[class.app-expanded-row]="expandedElement === verb"
+          (click)="expandedElement = expandedElement === verb ? null : verb" (click)="getDefinition(verb.base)"></tr>
+          <tr mat-row *matRowDef="let row; columns: ['verbDefinition']" class="app-detail-row"></tr>
         </table>
   </div>
 </body>
