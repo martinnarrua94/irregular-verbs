@@ -29,21 +29,19 @@ export class VerbService {
         let meanings: IMeaning = response[0].meaning;
         let result: IVerb[] = [];
 
-        if (meanings["verb"]){
-          meanings["verb"].forEach((verb: IVerb) => {
+        const verbKeys: string[] = [];
+
+        Object.keys(meanings).forEach(key => {
+          if (key.includes('verb')) {
+            verbKeys.push(key)
+          }  
+        })
+
+        verbKeys.forEach(key =>{
+          meanings[key].forEach((verb: IVerb) => {
             result.push(verb);
           });
-        }
-        if (meanings["intransitive verb"]){
-          meanings["intransitive verb"].forEach((verb: IVerb) => {
-            result.push(verb);
-          });
-        }
-        if (meanings["transitive verb"]){
-          meanings["transitive verb"].forEach((verb: IVerb) => {
-            result.push(verb);
-          });
-        }
+        })
         
         return result;
       }),
