@@ -14,7 +14,8 @@
   </mat-form-field>
   <div *ngIf="dataSource.data.length == 0" class="container mat-subheading-2">
     <mat-icon aria-hidden="false" aria-label="Info icon">info</mat-icon>
-    Sorry, we couldn't find any results matching your filter criteria.</div>
+    Sorry, we couldn't find any results matching your filter criteria.
+  </div>
   <div class="container mat-elevation-z8" *ngIf="dataSource.data.length != 0">    
       <table mat-table [dataSource]="dataSource" multiTemplateDataRows>
           
@@ -45,7 +46,8 @@
                     
                     <div *ngIf="errorMessage != ''" class="mat-subheading-2">
                       <mat-icon aria-hidden="false" aria-label="Info icon">info</mat-icon>
-                      Sorry, we couldn't find any definitions for this verb.</div>
+                      {{errorMessage}}
+                    </div>
 
                     <ul>
                       <li *ngFor="let item of verbDefinition">

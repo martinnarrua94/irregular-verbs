@@ -54,13 +54,10 @@ export class VerbListComponent implements OnInit {
     this.errorMessage = '';
     this.verbService.getDefinition(verb).subscribe({
       next: verbDefinition => {
-        debugger;
         this.verbDefinition = verbDefinition;
-        console.log(this.verbDefinition);
       },
       error: err => {
         this.errorMessage = err;
-        console.log(this.errorMessage)
       }
     }); 
   }

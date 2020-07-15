@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
 import { IVerbTenses } from '../models/verbTenses';
 import { map, catchError } from 'rxjs/operators';
 import { IVerb } from '../models/verb';
@@ -50,6 +50,19 @@ export class VerbService {
   }
 
   errorHandler(error: HttpErrorResponse) {
-    return Observable.throw(error.message || "server error.");
+    let message = '';
+    switch (error.status) {
+      case 429:
+        message = "Sorry, the server isn't available right now. Please, try again later";       
+        break;
+      case 404:
+        message = "Sorry we couldn't find  any definitions for this verb";
+        break;
+      default:
+        message = "Sorry, there was a problem with the server. Please, try again later"
+        break;
+    }
+
+    return throwError(message);
 }
 }
