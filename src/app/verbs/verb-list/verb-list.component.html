@@ -1,20 +1,22 @@
 <body>
   <div class="mat-title">
     <mat-icon aria-hidden="false" aria-label="Spell check icon">spellcheck</mat-icon>
-    You can choose the starting letter of the verb you are looking for:</div>
+    <span class="app-icon-label">You can choose the starting letter of the verb you are looking for:</span>
+  </div>
   <mat-button-toggle-group name="letterToggle" aria-label="Letter Toggle">
     <mat-button-toggle class="app-button-toggle" *ngFor="let letter of letters" [value]="letter" (click)="startsWith($event)" >{{letter}}</mat-button-toggle>
   </mat-button-toggle-group>
   <div class="mat-title" style="padding-top: 30px">
     <mat-icon aria-hidden="false" aria-label="Search icon">search</mat-icon>
-    Or you can start writing it in the following input filter:</div>
+    <span class="app-icon-label">Or you can start writing it in the following input filter:</span>
+  </div>
   <mat-form-field>
     <mat-label>Filter</mat-label>
     <input matInput (keyup)="applyFilter($event)" placeholder="Ex. have" #input>
   </mat-form-field>
   <div *ngIf="dataSource.data.length == 0" class="container mat-subheading-2">
     <mat-icon aria-hidden="false" aria-label="Info icon">info</mat-icon>
-    Sorry, we couldn't find any results matching your filter criteria.
+    <span class="app-icon-error">Sorry, we couldn't find any results matching your filter criteria.</span>
   </div>
   <div class="container mat-elevation-z8" *ngIf="dataSource.data.length != 0">    
       <table mat-table [dataSource]="dataSource" multiTemplateDataRows>
@@ -46,7 +48,7 @@
                     
                     <div *ngIf="errorMessage != ''" class="mat-subheading-2">
                       <mat-icon aria-hidden="false" aria-label="Info icon">info</mat-icon>
-                      {{errorMessage}}
+                      <span class="app-icon-error">{{errorMessage}}</span>
                     </div>
 
                     <ul>

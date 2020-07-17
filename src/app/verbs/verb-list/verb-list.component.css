@@ -69,4 +69,18 @@ table {
   .app-element-detail > .mat-spinner, .app-element-detail > .mat-subheading-2{
     margin: auto;
     width: 50%;
-  }  
+  }
+
+  .app-icon-label{
+    position: absolute;
+  }
+
+  .app-icon-error{
+    position: absolute;
+    padding-top: 2px;
+    padding-left: 2px;
+  }
+
+  .mat-icon{
+    padding-top: 4px;
+  }
