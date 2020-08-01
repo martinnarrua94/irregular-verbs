@@ -11,6 +11,8 @@ import { MaterialModule } from './material/material.module';
 import { FooterComponent } from './shared/footer/footer.component';
 import { HeaderComponent } from './shared/header/header.component';
 import { CoverComponent } from './shared/cover/cover.component';
+import { VerbFilterComponent } from './verbs/verb-filter/verb-filter.component';
+import { VerbComponent } from './verbs/verb/verb.component';
 
 
 @NgModule({
@@ -19,7 +21,9 @@ import { CoverComponent } from './shared/cover/cover.component';
     VerbListComponent,
     FooterComponent,
     HeaderComponent,
-    CoverComponent
+    CoverComponent,
+    VerbFilterComponent,
+    VerbComponent
   ],
   imports: [
     BrowserModule,
@@ -27,7 +31,7 @@ import { CoverComponent } from './shared/cover/cover.component';
     HttpClientModule,
     MaterialModule,
     RouterModule.forRoot([
-      { path: 'home', component: VerbListComponent},
+      { path: 'home', component: VerbComponent},
       { path: '', redirectTo: 'home', pathMatch: 'full' },
       { path: '**', redirectTo: 'home', pathMatch: 'full' }
     ]),

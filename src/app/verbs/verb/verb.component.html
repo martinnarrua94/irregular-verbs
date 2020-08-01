@@ -1,0 +1,9 @@
+<body>
+    <app-verb-filter [dataSource]=verbs
+                     [originalDataSource] =originalVerbs
+                     (dataSourceEvent)="verbsHaveChanged($event)">
+    </app-verb-filter>
+    
+    <app-verb-list [dataSource]=verbs>       
+    </app-verb-list>
+</body>

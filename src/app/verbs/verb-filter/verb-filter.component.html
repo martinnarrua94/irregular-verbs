@@ -1,0 +1,16 @@
+<div class="mat-title">
+    <mat-icon aria-hidden="false" aria-label="Spell check icon">spellcheck</mat-icon>
+    <span class="app-icon-label">You can choose the starting letter of the verb you are looking for:</span>
+</div>
+<mat-button-toggle-group name="letterToggle" aria-label="Letter Toggle">
+  <mat-button-toggle class="app-button-toggle" *ngFor="let letter of letters" [value]="letter" (click)="startsWith($event)" >{{letter}}</mat-button-toggle>
+</mat-button-toggle-group>
+
+<div class="mat-title" style="padding-top: 30px">
+  <mat-icon aria-hidden="false" aria-label="Search icon">search</mat-icon>
+  <span class="app-icon-label">Or you can start writing it in the following input filter:</span>
+</div>
+<mat-form-field>
+  <mat-label>Filter</mat-label>
+  <input matInput (keyup)="applyFilter($event)" placeholder="Ex. have" #input>
+</mat-form-field>

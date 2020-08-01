@@ -1,75 +1,58 @@
-<body>
-  <div class="mat-title">
-    <mat-icon aria-hidden="false" aria-label="Spell check icon">spellcheck</mat-icon>
-    <span class="app-icon-label">You can choose the starting letter of the verb you are looking for:</span>
-  </div>
-  <mat-button-toggle-group name="letterToggle" aria-label="Letter Toggle">
-    <mat-button-toggle class="app-button-toggle" *ngFor="let letter of letters" [value]="letter" (click)="startsWith($event)" >{{letter}}</mat-button-toggle>
-  </mat-button-toggle-group>
-  <div class="mat-title" style="padding-top: 30px">
-    <mat-icon aria-hidden="false" aria-label="Search icon">search</mat-icon>
-    <span class="app-icon-label">Or you can start writing it in the following input filter:</span>
-  </div>
-  <mat-form-field>
-    <mat-label>Filter</mat-label>
-    <input matInput (keyup)="applyFilter($event)" placeholder="Ex. have" #input>
-  </mat-form-field>
-  <div *ngIf="dataSource.data.length == 0" class="container mat-subheading-2">
-    <mat-icon aria-hidden="false" aria-label="Info icon">info</mat-icon>
-    <span class="app-icon-error">Sorry, we couldn't find any results matching your filter criteria.</span>
-  </div>
-  <div class="container mat-elevation-z8" *ngIf="dataSource.data.length != 0">    
-      <table mat-table [dataSource]="dataSource" multiTemplateDataRows>
-          
-          <!-- Infinitive Column -->
-          <ng-container matColumnDef="base">
-            <th mat-header-cell *matHeaderCellDef> Infinite </th>
-            <td mat-cell *matCellDef="let verb"> {{verb.base}} </td>
-          </ng-container>
+<div *ngIf="dataSource.data.length == 0" class="container mat-subheading-2">
+  <mat-icon aria-hidden="false" aria-label="Info icon">info</mat-icon>
+  <span class="app-icon-error">Sorry, we couldn't find any results matching your filter criteria.</span>
+</div>
+<div class="container mat-elevation-z8" *ngIf="dataSource.data.length != 0">    
+    <table mat-table [dataSource]="dataSource" multiTemplateDataRows>
         
-          <!-- Past Simple Column -->
-          <ng-container matColumnDef="pastSimple">
-            <th mat-header-cell *matHeaderCellDef> Past Simple </th>
-            <td mat-cell *matCellDef="let verb"> {{verb.pastSimple}} </td>
-          </ng-container>
-        
-          <!-- Past Participle Column -->
-          <ng-container matColumnDef="pastParticiple">
-            <th mat-header-cell *matHeaderCellDef> Past Participle </th>
-            <td mat-cell *matCellDef="let verb"> {{verb.pastParticiple}} </td>
-          </ng-container>
+        <!-- Infinitive Column -->
+        <ng-container matColumnDef="base">
+          <th mat-header-cell *matHeaderCellDef> Infinite </th>
+          <td mat-cell *matCellDef="let verb"> {{verb.base}} </td>
+        </ng-container>
+      
+        <!-- Past Simple Column -->
+        <ng-container matColumnDef="pastSimple">
+          <th mat-header-cell *matHeaderCellDef> Past Simple </th>
+          <td mat-cell *matCellDef="let verb"> {{verb.pastSimple}} </td>
+        </ng-container>
+      
+        <!-- Past Participle Column -->
+        <ng-container matColumnDef="pastParticiple">
+          <th mat-header-cell *matHeaderCellDef> Past Participle </th>
+          <td mat-cell *matCellDef="let verb"> {{verb.pastParticiple}} </td>
+        </ng-container>
 
-          <!-- Expanded Content Column -->
-          <ng-container matColumnDef="verbDefinition">
-            <td mat-cell *matCellDef="let verb" [attr.colspan]="displayedColumns.length">
-              <div class="app-element-detail"
-                    [@detailExpand]="verb == expandedElement ? 'expanded' : 'collapsed'">
-                    <mat-spinner *ngIf="!verbDefinition && errorMessage == ''"></mat-spinner>
-                    
-                    <div *ngIf="errorMessage != ''" class="mat-subheading-2">
-                      <mat-icon aria-hidden="false" aria-label="Info icon">info</mat-icon>
-                      <span class="app-icon-error">{{errorMessage}}</span>
-                    </div>
+        <!-- Expanded Content Column -->
+        <ng-container matColumnDef="verbDefinition">
+          <td mat-cell *matCellDef="let verb" [attr.colspan]="displayedColumns.length">
+            <div class="app-element-detail"
+                  [@detailExpand]="verb == expandedElement ? 'expanded' : 'collapsed'">
+                  <mat-spinner *ngIf="!verbDefinition && errorMessage == ''"></mat-spinner>
+                  
+                  <div *ngIf="errorMessage != ''" class="mat-subheading-2">
+                    <mat-icon aria-hidden="false" aria-label="Info icon">info</mat-icon>
+                    <span class="app-icon-error">{{errorMessage}}</span>
+                  </div>
 
-                    <ul>
-                      <li *ngFor="let item of verbDefinition">
-                        <span class="mat-body-2">
-                          {{item.definition}}
-                        </span>
-                        - 
-                        <span class="mat-body-1">
-                        <i>"{{item.example}}"</i>
-                        </span>
-                      </li>                                                       
-                    </ul>                      
-              </div>
-            </td>
-          </ng-container>
-        
-          <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky:true"></tr>
-          <tr mat-row *matRowDef="let verb; columns: displayedColumns;"[class.app-expanded-row]="expandedElement === verb"
-          (click)="expandedElement = expandedElement === verb ? null : verb" (click)="getDefinition(verb.base)"></tr>
-          <tr mat-row *matRowDef="let row; columns: ['verbDefinition']" class="app-detail-row"></tr>
-        </table>
-  </div>
-</body>
+                  <ul>
+                    <li *ngFor="let item of verbDefinition">
+                      <span class="mat-body-2">
+                        {{item.definition}}
+                      </span>
+                      - 
+                      <span class="mat-body-1">
+                      <i>"{{item.example}}"</i>
+                      </span>
+                    </li>                                                       
+                  </ul>                      
+            </div>
+          </td>
+        </ng-container>
+      
+        <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky:true"></tr>
+        <tr mat-row *matRowDef="let verb; columns: displayedColumns;"[class.app-expanded-row]="expandedElement === verb"
+        (click)="expandedElement = expandedElement === verb ? null : verb" (click)="getDefinition(verb.base)"></tr>
+        <tr mat-row *matRowDef="let row; columns: ['verbDefinition']" class="app-detail-row"></tr>
+      </table>
+</div>
