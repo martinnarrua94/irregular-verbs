@@ -8,6 +8,7 @@ import { IVerbTenses } from 'src/app/models/verbTenses';
 })
 export class VerbFilterComponent {
 
+  filterValue: string = '';
   letters: string[] = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z','ALL' ]
 
   @Input() verbs: IVerbTenses[] = [];
@@ -27,6 +28,7 @@ export class VerbFilterComponent {
   }
 
   clearFilter(){
+    this.filterValue = '';
     this.resetVerbs();
   }
 

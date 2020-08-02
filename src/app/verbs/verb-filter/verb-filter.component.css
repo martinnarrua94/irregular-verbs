@@ -30,3 +30,12 @@
   .mat-icon{
     padding-top: 4px;
   }
+
+  .app-clear-icon{
+    background: none;
+    border: none;
+  }
+
+  .app-clear-icon:focus{
+    border: none;
+  }

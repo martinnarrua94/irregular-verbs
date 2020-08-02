@@ -12,5 +12,8 @@
 </div>
 <mat-form-field>
   <mat-label>Filter</mat-label>
-  <input matInput (keyup)="applyFilter($event)" placeholder="Ex. have" #input>
+  <input matInput (keyup)="applyFilter($event)" placeholder="Ex. have" [(ngModel)]="filterValue" #input>
+  <button *ngIf="filterValue" matSuffix mat-icon-button aria-label="Clear" (click)="clearFilter()" class="app-clear-icon">
+    <mat-icon>close</mat-icon>
+  </button>
 </mat-form-field>

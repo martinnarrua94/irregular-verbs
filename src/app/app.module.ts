@@ -13,6 +13,7 @@ import { CoverComponent } from './shared/cover/cover.component';
 import { VerbComponent } from './verbs/verb/verb.component';
 import { VerbListComponent } from './verbs/verb-list/verb-list.component';
 import { VerbFilterComponent } from './verbs/verb-filter/verb-filter.component';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -30,6 +31,7 @@ import { VerbFilterComponent } from './verbs/verb-filter/verb-filter.component';
     AppRoutingModule,
     HttpClientModule,
     MaterialModule,
+    FormsModule,
     RouterModule.forRoot([
       { path: 'home', component: VerbComponent},
       { path: '', redirectTo: 'home', pathMatch: 'full' },
