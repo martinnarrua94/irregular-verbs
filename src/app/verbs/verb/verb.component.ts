@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { MatTableDataSource } from '@angular/material/table';
 import { IVerbTenses } from 'src/app/models/verbTenses';
 import { VerbService } from '../verb.service';
 
@@ -10,22 +9,26 @@ import { VerbService } from '../verb.service';
 })
 export class VerbComponent implements OnInit {
 
-  verbs = new MatTableDataSource<IVerbTenses>();
-  originalVerbs = new MatTableDataSource<IVerbTenses>();
+  verbs: IVerbTenses[] = [];
+  originalVerbs: IVerbTenses[] = [];
 
   constructor(private verbService: VerbService) { }
 
   ngOnInit(): void {
     this.verbService.getVerbs().subscribe({
       next: verbs => {    
-        this.originalVerbs = new MatTableDataSource<IVerbTenses>(verbs);
-        this.verbs = this.originalVerbs;
+        this.originalVerbs = verbs;
+        this.verbs =  verbs;
       }
     });   
   }
 
-  verbsHaveChanged($event: MatTableDataSource<IVerbTenses>) {
+  verbsHaveChanged($event: IVerbTenses[]) {
     this.verbs = $event;
+  }
+
+  resetVerbs() {
+    this.verbs = this.originalVerbs;
   }
 
 }

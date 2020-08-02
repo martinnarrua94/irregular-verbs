@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { IVerbTenses } from '../../models/verbTenses';
 import { VerbService } from '../verb.service';
 import { MatTableDataSource } from '@angular/material/table';
@@ -18,12 +18,13 @@ import { IVerb } from '../../models/verb';
   ],
 })
 
-export class VerbListComponent implements OnInit {
+export class VerbListComponent {
 
   displayedColumns: string[] = ['base', 'pastSimple', 'pastParticiple'];
   
-  @Input() dataSource = new MatTableDataSource<IVerbTenses>();
-  originalDataSource = new MatTableDataSource<IVerbTenses>();
+  @Input() verbs: IVerbTenses[] = [];
+
+  dataSource = new MatTableDataSource<IVerbTenses>();
 
   expandedElement: string | undefined;
 
@@ -31,10 +32,10 @@ export class VerbListComponent implements OnInit {
 
   errorMessage = '';
   
-  constructor(private verbService: VerbService) { }
+  constructor(private verbService: VerbService) {}
 
-  ngOnInit(): void {    
-        this.originalDataSource = this.dataSource;   
+  ngOnChanges(): void {   
+    this.dataSource = new MatTableDataSource<IVerbTenses>(this.verbs); 
   }
 
   getDefinition(verb: string){

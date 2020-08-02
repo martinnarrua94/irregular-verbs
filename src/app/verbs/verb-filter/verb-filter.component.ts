@@ -1,5 +1,4 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { MatTableDataSource } from '@angular/material/table';
 import { IVerbTenses } from 'src/app/models/verbTenses';
 
 @Component({
@@ -11,17 +10,24 @@ export class VerbFilterComponent {
 
   letters: string[] = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z','ALL' ]
 
-  @Input() dataSource = new MatTableDataSource<IVerbTenses>();
-  @Input() originalDataSource = new MatTableDataSource<IVerbTenses>();
+  @Input() verbs: IVerbTenses[] = [];
+  @Input() originalVerbs: IVerbTenses[] = [];
 
-  @Output() dataSourceEvent = new EventEmitter<MatTableDataSource<IVerbTenses>>();
+  @Output() filterEvent = new EventEmitter<IVerbTenses[]>();
+  @Output() resetEvent = new EventEmitter();
 
   constructor() { }
 
   applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-    this.dataSourceHasChanged();
+    const filterValue = (event.target as HTMLInputElement).value.trim().toLowerCase();
+    this.verbs = this.originalVerbs.filter(x => x.base.includes(filterValue) ||
+                                                x.pastSimple.includes(filterValue) ||
+                                                x.pastParticiple.includes(filterValue));
+    this.verbsHaveChanged();
+  }
+
+  clearFilter(){
+    this.resetVerbs();
   }
 
   startsWith(event: Event){
@@ -29,27 +35,30 @@ export class VerbFilterComponent {
 
     switch (filterValue) {
       case "ALL":
-        this.dataSource = this.originalDataSource;
-        this.dataSourceHasChanged();
+        this.resetVerbs();
         break;
 
       case null:
         break;
 
       default:
-        this.dataSource = new MatTableDataSource<IVerbTenses>();
-        this.originalDataSource.data.forEach(verb => {
+        this.verbs = [];
+        this.originalVerbs.forEach(verb => {
           if (verb.base.indexOf(filterValue.toLowerCase()) === 0) {
-            this.dataSource.data.push(verb);
+            this.verbs.push(verb);
           }
         });
-        this.dataSourceHasChanged();
+        this.verbsHaveChanged();
         break;
     }  
   }
 
-  dataSourceHasChanged() {
-    this.dataSourceEvent.emit(this.dataSource);
+  verbsHaveChanged() {
+    this.filterEvent.emit(this.verbs);
+  }
+
+  resetVerbs() {
+    this.resetEvent.emit();
   }
 
 }
